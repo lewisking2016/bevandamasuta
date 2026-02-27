@@ -36,7 +36,7 @@ export default function PortfolioPage() {
             <Header />
             <main>
                 {/* Hero */}
-                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "200px", paddingBottom: "120px", textAlign: "center" }}>
+                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "clamp(120px, 15vh, 200px)", paddingBottom: "clamp(60px, 8vh, 120px)", textAlign: "center" }}>
                     <div className="container" style={{ maxWidth: "800px" }}>
                         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textTransform: "uppercase", letterSpacing: "4px", fontSize: "0.8rem", color: "var(--gold)", marginBottom: "20px" }}>
                             Our Work
@@ -52,13 +52,13 @@ export default function PortfolioPage() {
 
                 {/* Projects */}
                 <section style={{ padding: "var(--section-padding)", background: "var(--background)" }}>
-                    <div className="container" style={{ display: "flex", flexDirection: "column", gap: "100px", maxWidth: "1100px" }}>
+                    <div className="container" style={{ display: "flex", flexDirection: "column", gap: "clamp(60px, 10vw, 100px)", maxWidth: "1100px" }}>
                         {projects.map((project, index) => (
                             <motion.div key={project.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                                style={{ display: "grid", gridTemplateColumns: index % 2 === 0 ? "1.2fr 1fr" : "1fr 1.2fr", gap: "70px", alignItems: "center" }}>
+                                className="grid-2" style={{ alignItems: "center" }}>
 
                                 {index % 2 !== 0 && (
-                                    <div style={{ position: "relative", height: "480px", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
+                                    <div style={{ position: "relative", height: "clamp(300px, 45vh, 480px)", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
                                         <motion.img
                                             src={project.image}
                                             alt={project.title}
@@ -86,7 +86,7 @@ export default function PortfolioPage() {
                                 </div>
 
                                 {index % 2 === 0 && (
-                                    <div style={{ position: "relative", height: "480px", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
+                                    <div style={{ position: "relative", height: "clamp(300px, 45vh, 480px)", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
                                         <motion.img
                                             src={project.image}
                                             alt={project.title}

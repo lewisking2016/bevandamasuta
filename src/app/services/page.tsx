@@ -89,7 +89,7 @@ export default function ServicesPage() {
             <Header />
             <main>
                 {/* Hero */}
-                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "200px", paddingBottom: "120px", textAlign: "center" }}>
+                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "clamp(120px, 15vh, 200px)", paddingBottom: "clamp(60px, 8vh, 120px)", textAlign: "center" }}>
                     <div className="container" style={{ maxWidth: "800px" }}>
                         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textTransform: "uppercase", letterSpacing: "4px", fontSize: "0.8rem", color: "var(--gold)", marginBottom: "20px" }}>
                             Our Expertise
@@ -106,7 +106,7 @@ export default function ServicesPage() {
                 {/* Services */}
                 {services.map((service, index) => (
                     <section key={service.title} style={{ padding: "var(--section-padding)", background: index % 2 === 0 ? "var(--background)" : "var(--background-alt)" }}>
-                        <div className="container" style={{ display: "grid", gridTemplateColumns: index % 2 === 0 ? "1fr 1fr" : "1fr 1fr", gap: "80px", alignItems: "center", maxWidth: "1100px", direction: index % 2 === 0 ? "ltr" : "rtl" }}>
+                        <div className="container grid-2" style={{ alignItems: "center", maxWidth: "1100px", direction: index % 2 === 0 ? "ltr" : "rtl" }}>
                             <motion.div initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ direction: "ltr" }}>
                                 <div style={{ color: "var(--gold)", marginBottom: "25px" }}>{service.icon}</div>
                                 <p style={{ textTransform: "uppercase", letterSpacing: "3px", fontSize: "0.75rem", color: "var(--primary)", marginBottom: "15px" }}>{service.tagline}</p>
@@ -139,7 +139,7 @@ export default function ServicesPage() {
                             <h2 style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)", fontWeight: 400 }}>Rates & <span style={{ fontStyle: "italic", color: "var(--gold)" }}>Packages</span></h2>
                         </div>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "30px" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "30px" }}>
                             {pricingData.map((group, idx) => (
                                 <motion.div
                                     key={group.category}

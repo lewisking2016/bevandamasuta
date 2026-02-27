@@ -24,7 +24,7 @@ export default function AboutPage() {
             <Header />
             <main>
                 {/* Hero */}
-                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "200px", paddingBottom: "120px", textAlign: "center" }}>
+                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "clamp(120px, 15vh, 200px)", paddingBottom: "clamp(60px, 8vh, 120px)", textAlign: "center" }}>
                     <div className="container" style={{ maxWidth: "800px" }}>
                         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textTransform: "uppercase", letterSpacing: "4px", fontSize: "0.8rem", color: "var(--gold)", marginBottom: "20px" }}>
                             Who We Are
@@ -40,7 +40,7 @@ export default function AboutPage() {
 
                 {/* Story */}
                 <section style={{ padding: "var(--section-padding)", background: "var(--background)" }}>
-                    <div className="container" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center", maxWidth: "1100px" }}>
+                    <div className="container grid-2" style={{ alignItems: "center", maxWidth: "1100px" }}>
                         <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                             <p style={{ textTransform: "uppercase", letterSpacing: "3px", fontSize: "0.8rem", color: "var(--primary)", marginBottom: "20px" }}>Our Story</p>
                             <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", marginBottom: "30px", lineHeight: 1.2 }}>
@@ -53,7 +53,7 @@ export default function AboutPage() {
                                 Today, we partner with hotels, restaurants, event brands, and corporate clients to build bar programs that are operationally sound, culturally resonant, and commercially successful. Our work spans Nairobi and beyond.
                             </p>
                         </motion.div>
-                        <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: "relative", height: "500px", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
+                        <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ position: "relative", height: "clamp(300px, 50vh, 500px)", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background-alt)" }}>
                             <motion.img
                                 src="/images/im6.png"
                                 alt="Bevanda Masuta Story"
