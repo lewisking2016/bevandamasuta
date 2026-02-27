@@ -79,7 +79,7 @@ export default function ContactPage() {
             <Header />
             <main>
                 {/* Hero */}
-                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "200px", paddingBottom: "120px", textAlign: "center" }}>
+                <section style={{ background: "var(--secondary)", color: "white", paddingTop: "clamp(120px, 15vh, 200px)", paddingBottom: "clamp(60px, 8vh, 120px)", textAlign: "center" }}>
                     <div className="container" style={{ maxWidth: "700px" }}>
                         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textTransform: "uppercase", letterSpacing: "4px", fontSize: "0.8rem", color: "var(--gold)", marginBottom: "20px" }}>
                             Get in Touch
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
                 {/* Contact Grid */}
                 <section style={{ padding: "var(--section-padding)", background: "var(--background)" }}>
-                    <div className="container" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "80px", maxWidth: "1100px" }}>
+                    <div className="container contact-grid-wrapper" style={{ display: "grid", gap: "60px", maxWidth: "1100px" }}>
 
                         {/* Info Column */}
                         <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+                                    <div className="form-row-2">
                                         <div>
                                             <label style={{ display: "block", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "10px", color: "var(--foreground)" }}>First Name</label>
                                             <input
@@ -180,7 +180,7 @@ export default function ContactPage() {
                                         />
                                     </div>
 
-                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 2.5fr", gap: "20px" }}>
+                                    <div className="form-row-phone">
                                         <CustomDropdown
                                             label="Country"
                                             value={form.country_code}

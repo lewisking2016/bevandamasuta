@@ -51,24 +51,31 @@ export default function Header() {
                     background: "var(--glass)",
                     backdropFilter: "blur(20px)",
                     borderRadius: "100px",
-                    padding: "10px 30px",
+                    padding: "10px 25px",
                     maxWidth: "1200px",
                     width: "95%",
                     margin: "0 auto",
                     boxShadow: "var(--shadow-premium)",
-                    border: "1px solid rgba(197, 160, 89, 0.2)", // Subtle Gold border
+                    border: "1px solid rgba(197, 160, 89, 0.2)",
                     transition: "var(--transition)"
                 }}
             >
-                <Link href="/" style={{ display: "flex", alignItems: "center", transition: "transform 0.3s ease", marginLeft: "-30px" }} className="logo-hover">
-                    <Image
-                        src="/images/blogo.png"
-                        alt="Bevanda Masuta Logo"
-                        width={280}
-                        height={85}
-                        style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
-                        priority
-                    />
+                <Link href="/" style={{ display: "flex", alignItems: "center", transition: "transform 0.3s ease", position: "relative" }} className="logo-hover">
+                    <div className="logo-wrapper">
+                        <Image
+                            src="/images/blogo.png"
+                            alt="Bevanda Masuta Logo"
+                            width={220}
+                            height={60}
+                            style={{
+                                objectFit: "contain",
+                                filter: "brightness(0) invert(1)",
+                                width: "auto",
+                                height: "clamp(30px, 8vw, 55px)"
+                            }}
+                            priority
+                        />
+                    </div>
                 </Link>
 
                 {/* Desktop Nav */}
