@@ -14,10 +14,10 @@ export async function POST(req: Request) {
 
         // 2. Save to MySQL Database
         const dbConnection = await mysql.createConnection({
-            host: process.env.DB_HOST || 'localhost',
-            user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASSWORD || '',
-            database: process.env.DB_NAME || 'bevandamasuta_db',
+            host: process.env.DB_HOST || '145.239.19.134',
+            user: process.env.DB_USER || 'vnsbhpwh_bevanda',
+            password: process.env.DB_PASSWORD || 'lewisking2005',
+            database: process.env.DB_NAME || 'vnsbhpwh_bevandamasuta_db',
         });
 
         const insertQuery = `
