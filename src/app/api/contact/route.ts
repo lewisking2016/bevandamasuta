@@ -12,20 +12,50 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
 
-        // 2. Save to MySQL Database
-        const dbConnection = await mysql.createConnection({
-            host: process.env.DB_HOST || '145.239.19.134',
-            user: process.env.DB_USER || 'vnsbhpwh_bevanda',
-            password: process.env.DB_PASSWORD || 'lewisking2005',
-            database: process.env.DB_NAME || 'vnsbhpwh_bevandamasuta_db',
-        });
+        // 2. Save to MySQL Database (with Bridge Option)
+        let savedToDb = false;
 
-        const insertQuery = `
-            INSERT INTO contacts (first_name, last_name, email, country_code, phone_number, service_interest, subject, message) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        await dbConnection.execute(insertQuery, [first_name, last_name, email, country_code, phone_number, service_interest, subject, message]);
-        await dbConnection.end();
+        if (process.env.DB_BRIDGE_URL) {
+            try {
+                console.log("Using DB Bridge for database access...");
+                const bridgeResponse = await fetch(process.env.DB_BRIDGE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        key: 'bevanda_emergency_2026', // Access key for the bridge
+                        first_name, last_name, email, country_code, phone_number, service_interest, subject, message
+                    })
+                });
+
+                if (bridgeResponse.ok) {
+                    savedToDb = true;
+                    console.log("Data saved via PHP Bridge.");
+                } else {
+                    const bridgeError = await bridgeResponse.text();
+                    console.error("Bridge Error Response:", bridgeError);
+                }
+            } catch (bridgeErr) {
+                console.error("Bridge Connection Failed:", bridgeErr);
+            }
+        }
+
+        // If bridge failed or wasn't configured, try direct SQL
+        if (!savedToDb) {
+            const dbConnection = await mysql.createConnection({
+                host: process.env.DB_HOST || '145.239.19.134',
+                user: process.env.DB_USER || 'vnsbhpwh_bevanda',
+                password: process.env.DB_PASSWORD || 'lewisking2005',
+                database: process.env.DB_NAME || 'vnsbhpwh_bevandamasuta_db',
+            });
+
+            const insertQuery = `
+                INSERT INTO contacts (first_name, last_name, email, country_code, phone_number, service_interest, subject, message) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            `;
+            await dbConnection.execute(insertQuery, [first_name, last_name, email, country_code, phone_number, service_interest, subject, message]);
+            await dbConnection.end();
+            savedToDb = true;
+        }
 
         // 3. Send Email Notification via Nodemailer
         // NOTE: Make sure these environment variables are actually configured in .env.local
