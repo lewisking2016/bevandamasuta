@@ -3,14 +3,13 @@ const mysql = require('mysql2/promise');
 async function updateDatabase() {
     try {
         const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
+            host: process.env.DB_HOST || 'localhost',
+            user: process.env.DB_USER || 'root',
+            password: process.env.DB_PASSWORD || '',
+            database: process.env.DB_NAME || 'bevandamasuta_db',
         });
 
-        console.log("Connected to MySQL Server.");
-        await connection.query("CREATE DATABASE IF NOT EXISTS bevandamasuta_db");
-        await connection.query("USE bevandamasuta_db");
+        console.log("Connected to MySQL Database: " + (process.env.DB_NAME || 'bevandamasuta_db'));
 
         // Drop the old table to ensure a clean schema creation for the new fields
         // (Assuming this is a fresh project and overriding is fine)

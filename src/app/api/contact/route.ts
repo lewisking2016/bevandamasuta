@@ -31,9 +31,9 @@ export async function POST(req: Request) {
         // NOTE: Make sure these environment variables are actually configured in .env.local
         // For local development without SMTP, we can log to console, but the user requested an active email system
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || "mail.bevandamasuta.com",
-            port: 587, // Try 587 for STARTTLS
-            secure: false, // false for 587
+            host: process.env.SMTP_HOST || "pld109.truehost.cloud",
+            port: parseInt(process.env.SMTP_PORT || "465"),
+            secure: process.env.SMTP_SECURE === "true" || process.env.SMTP_PORT === "465",
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS,
