@@ -143,11 +143,13 @@ export async function POST(req: Request) {
 
         // If bridge failed or wasn't configured, try direct SQL
         if (!savedToDb) {
+            try {
             const dbConnection = await mysql.createConnection({
                 host: process.env.DB_HOST || '145.239.19.134',
                 user: process.env.DB_USER || 'vnsbhpwh_bevanda',
                 password: process.env.DB_PASSWORD || 'lewisking2005',
                 database: process.env.DB_NAME || 'vnsbhpwh_bevandamasuta_db',
+                connectTimeout: 3000,
             });
 
             const insertQuery = `
@@ -157,6 +159,9 @@ export async function POST(req: Request) {
             await dbConnection.execute(insertQuery, [first_name, last_name, email, country_code, phone_number, service_interest, subject, message]);
             await dbConnection.end();
             savedToDb = true;
+            } catch (dbErr) {
+                console.error("Database connection/insert failed (continuing to email delivery):", dbErr);
+            }
         }
 
         // 3. Send Email Notification via Nodemailer
@@ -172,6 +177,7 @@ export async function POST(req: Request) {
             port: Number(process.env.SMTP_PORT || 587),
             secure: process.env.SMTP_SECURE === "true",
             requireTLS: true,
+            connectionTimeout: 10000,
             auth: {
                 user: smtpUser,
                 pass: smtpPass,
@@ -237,6 +243,7 @@ Bevanda Masuta`,
 
     } catch (error) {
         console.error("Contact Form API Error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        const msg = error instanceof Error ? error.message : "Internal Server Error";
+        return NextResponse.json({ error: msg }, { status: 500 });
     }
 }
