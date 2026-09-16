@@ -105,7 +105,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    <Link href="#contact" className="btn-primary" style={{ fontSize: "0.9rem", padding: "20px 50px", borderRadius: "100px", background: "linear-gradient(135deg, var(--primary), var(--accent))", border: "1px solid var(--gold)" }}>
+                    <Link href="/contact" className="btn-primary" style={{ fontSize: "0.9rem", padding: "20px 50px", borderRadius: "100px", background: "linear-gradient(135deg, var(--primary), var(--accent))", border: "1px solid var(--gold)" }}>
                         Learn More
                     </Link>
                 </motion.div>
