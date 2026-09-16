@@ -64,14 +64,57 @@ function ApplyFormContent() {
 
     if (submitted) {
         return (
-            <div style={{ textAlign: "center", padding: "100px 20px", background: "var(--background-alt)", borderRadius: "24px" }}>
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} style={{ fontSize: "4rem", color: "var(--gold)", marginBottom: "30px" }}>✓</motion.div>
-                <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>Application Received!</h2>
-                <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginBottom: "40px" }}>Thank you for your interest. Bevanda Masuta will contact you within 24 hours.</p>
-                <Link href="/services" className="btn-primary" style={{ borderRadius: "100px", padding: "15px 40px" }}>
-                    Back to Services
-                </Link>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{
+                    textAlign: "center",
+                    padding: "70px 40px",
+                    background: "var(--background-alt)",
+                    borderRadius: "24px",
+                    border: "1px solid rgba(197, 160, 89, 0.3)",
+                    boxShadow: "0 20px 50px rgba(141, 27, 51, 0.06)"
+                }}
+            >
+                <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                    style={{
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, var(--primary), var(--accent))",
+                        color: "var(--gold)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "2.5rem",
+                        margin: "0 auto 24px",
+                        boxShadow: "0 10px 30px rgba(141, 27, 51, 0.3)",
+                        border: "2px solid var(--gold)"
+                    }}
+                >
+                    ✓
+                </motion.div>
+                <h2 style={{ fontSize: "2.3rem", marginBottom: "14px", fontWeight: 700, color: "var(--foreground)" }}>
+                    Application Received!
+                </h2>
+                <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto 24px" }}>
+                    Thank you, <strong style={{ color: "var(--primary)" }}>{form.first_name}</strong>. Your rate card request for <strong style={{ color: "var(--gold)" }}>{form.service_interest}</strong> has been received.
+                </p>
+                <div style={{ background: "rgba(197, 160, 89, 0.08)", padding: "16px 24px", borderRadius: "14px", border: "1px dashed rgba(197, 160, 89, 0.4)", marginBottom: "36px" }}>
+                    <p style={{ margin: 0, fontSize: "0.92rem", color: "var(--foreground)", fontWeight: 500 }}>
+                        📧 A confirmation copy has been sent to <strong style={{ textDecoration: "underline" }}>{form.email}</strong>. Our team will contact you within 24 hours.
+                    </p>
+                </div>
+                <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+                    <Link href="/services" className="btn-primary" style={{ borderRadius: "100px", padding: "14px 36px", fontSize: "0.85rem" }}>
+                        Back to Services
+                    </Link>
+                </div>
+            </motion.div>
         );
     }
 

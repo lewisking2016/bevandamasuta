@@ -133,11 +133,73 @@ export default function ContactPage() {
                         {/* Form Column */}
                         <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                             {submitted ? (
-                                <div style={{ textAlign: "center", padding: "80px 40px", background: "var(--background-alt)", borderRadius: "20px" }}>
-                                    <div style={{ fontSize: "3rem", marginBottom: "20px" }}>✓</div>
-                                    <h3 style={{ fontSize: "1.8rem", marginBottom: "15px" }}>Message Sent!</h3>
-                                    <p style={{ color: "var(--text-muted)" }}>We'll be in touch within 24 hours.</p>
-                                </div>
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    style={{
+                                        textAlign: "center",
+                                        padding: "60px 40px",
+                                        background: "var(--background-alt)",
+                                        borderRadius: "24px",
+                                        border: "1px solid rgba(197, 160, 89, 0.3)",
+                                        boxShadow: "0 20px 50px rgba(141, 27, 51, 0.06)"
+                                    }}
+                                >
+                                    <motion.div
+                                        initial={{ scale: 0, rotate: -180 }}
+                                        animate={{ scale: 1, rotate: 0 }}
+                                        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            borderRadius: "50%",
+                                            background: "linear-gradient(135deg, var(--primary), var(--accent))",
+                                            color: "var(--gold)",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            fontSize: "2.5rem",
+                                            margin: "0 auto 24px",
+                                            boxShadow: "0 10px 30px rgba(141, 27, 51, 0.3)",
+                                            border: "2px solid var(--gold)"
+                                        }}
+                                    >
+                                        ✓
+                                    </motion.div>
+                                    <h3 style={{ fontSize: "2.2rem", marginBottom: "12px", fontWeight: 700, color: "var(--foreground)" }}>
+                                        Message Sent Successfully!
+                                    </h3>
+                                    <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "460px", margin: "0 auto 24px" }}>
+                                        Thank you, <strong style={{ color: "var(--primary)" }}>{form.first_name}</strong>. Your inquiry has been delivered directly to our team.
+                                    </p>
+                                    <div style={{ background: "rgba(197, 160, 89, 0.08)", padding: "16px 24px", borderRadius: "14px", border: "1px dashed rgba(197, 160, 89, 0.4)", marginBottom: "32px" }}>
+                                        <p style={{ margin: 0, fontSize: "0.92rem", color: "var(--foreground)", fontWeight: 500 }}>
+                                            📧 We sent a confirmation email copy to <strong style={{ textDecoration: "underline" }}>{form.email}</strong>.
+                                        </p>
+                                    </div>
+                                    <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+                                        <button
+                                            onClick={() => {
+                                                setSubmitted(false);
+                                                setForm({
+                                                    first_name: "",
+                                                    last_name: "",
+                                                    email: "",
+                                                    country_code: "+254",
+                                                    phone_number: "",
+                                                    service_interest: "",
+                                                    subject: "",
+                                                    message: ""
+                                                });
+                                            }}
+                                            className="btn-primary"
+                                            style={{ borderRadius: "100px", padding: "14px 32px", fontSize: "0.85rem" }}
+                                        >
+                                            Send Another Message
+                                        </button>
+                                    </div>
+                                </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                                     <div className="form-row-2">
