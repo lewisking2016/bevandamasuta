@@ -98,7 +98,7 @@ export async function POST(req: Request) {
             last_name: normalize(body.last_name),
             email: normalize(body.email),
             country_code: normalize(body.country_code),
-            phone_number: normalize(body.phone_number),
+            phone_number: normalize(body.phone_number) || "N/A",
             service_interest: normalize(body.service_interest),
             subject: normalize(body.subject),
             message: normalize(body.message),
@@ -106,7 +106,7 @@ export async function POST(req: Request) {
         const { first_name, last_name, email, country_code, phone_number, service_interest, subject, message } = contact;
 
         // 1. Basic Validation
-        if (!first_name || !last_name || !email || !country_code || !phone_number || !service_interest || !subject || !message) {
+        if (!first_name || !last_name || !email || !service_interest || !subject || !message) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
 

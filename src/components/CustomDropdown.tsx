@@ -33,7 +33,7 @@ export default function CustomDropdown({ label, options, value, onChange, placeh
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const selectedOptionLabel = options.flatMap(opt => 'options' in opt ? opt.options : opt).find(opt => opt.value === value)?.label || placeholder || "Select an option...";
+    const selectedOptionLabel = options.flatMap(opt => 'options' in opt ? opt.options : opt).find(opt => opt.value === value)?.label || value || placeholder || "Select an option...";
 
     const handleSelect = (val: string) => {
         onChange(val);

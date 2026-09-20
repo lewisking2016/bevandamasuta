@@ -9,6 +9,17 @@ import { CheckCircle2, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import CustomDropdown from "@/components/CustomDropdown";
 
+const countryOptions = [
+    { value: "+254", label: "🇰🇪 +254 (Kenya)" },
+    { value: "+255", label: "🇹🇿 +255 (Tanzania)" },
+    { value: "+256", label: "🇺🇬 +256 (Uganda)" },
+    { value: "+250", label: "🇷🇼 +250 (Rwanda)" },
+    { value: "+1", label: "🇺🇸 +1 (USA)" },
+    { value: "+44", label: "🇬🇧 +44 (UK)" },
+    { value: "+971", label: "🇦🇪 +971 (UAE)" },
+    { value: "+27", label: "🇿🇦 +27 (SA)" },
+];
+
 function ApplyFormContent() {
     const searchParams = useSearchParams();
     const serviceParam = searchParams.get("service");
@@ -155,6 +166,27 @@ function ApplyFormContent() {
                     />
                 </div>
 
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "20px" }}>
+                    <CustomDropdown
+                        label="Country"
+                        value={form.country_code}
+                        options={countryOptions}
+                        onChange={(val) => setForm(prev => ({ ...prev, country_code: val }))}
+                        disabled={isSubmitting}
+                    />
+                    <div>
+                        <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "10px", fontWeight: 600 }}>Phone Number</label>
+                        <input
+                            type="tel"
+                            placeholder="700 000 000"
+                            value={form.phone_number}
+                            onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
+                            disabled={isSubmitting}
+                            style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                        />
+                    </div>
+                </div>
+
                 <div>
                     <CustomDropdown
                         label="Selected Service"
@@ -164,8 +196,10 @@ function ApplyFormContent() {
                         disabled={isSubmitting}
                         options={[
                             {
-                                label: "Content Creation",
+                                label: "Content Creation & Promotion",
                                 options: [
+                                    { value: "Content Creation & Promotion", label: "Content Creation & Promotion (Full Package)" },
+                                    { value: "Content Creation", label: "Content Creation" },
                                     { value: "YouTube Video Feature", label: "YouTube Video Feature" },
                                     { value: "Podcast Sponsorship", label: "Podcast Sponsorship" },
                                     { value: "Instagram Reel/Short", label: "Instagram Reel/Short" },
@@ -173,16 +207,20 @@ function ApplyFormContent() {
                                 ]
                             },
                             {
-                                label: "Event Hosting",
+                                label: "Event Hosting & Brand Activation",
                                 options: [
+                                    { value: "Event Hosting / Brand Activation", label: "Event Hosting / Brand Activation (Full Package)" },
+                                    { value: "Event Hosting", label: "Event Hosting" },
                                     { value: "Cocktail Party Hosting", label: "Cocktail Party Hosting" },
                                     { value: "Bar Takeover", label: "Bar Takeover / Guest Shift" },
                                     { value: "Tasting Session", label: "Tasting Session / Workshop" },
                                 ]
                             },
                             {
-                                label: "Consultation",
+                                label: "Consultation & Training",
                                 options: [
+                                    { value: "Consultation & Training", label: "Consultation & Training (Full Package)" },
+                                    { value: "Consultation", label: "Consultation" },
                                     { value: "Beverage Training", label: "Beverage Training" },
                                     { value: "Brand Consultation", label: "Brand Consultation" },
                                     { value: "Coaching", label: "Hospitality Tips & Coaching" },
