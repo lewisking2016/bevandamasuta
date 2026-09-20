@@ -103,6 +103,9 @@ export default function CustomDropdown({ label, options, value, onChange, placeh
                                                     borderRadius: "8px",
                                                     cursor: "pointer",
                                                     fontSize: "0.9rem",
+                                                    lineHeight: "1.4",
+                                                    wordBreak: "break-word",
+                                                    whiteSpace: "normal",
                                                     background: value === item.value ? "rgba(141, 27, 51, 0.05)" : "transparent",
                                                     color: value === item.value ? "var(--primary)" : "var(--foreground)",
                                                     transition: "background 0.2s"

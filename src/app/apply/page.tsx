@@ -81,7 +81,7 @@ function ApplyFormContent() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 style={{
                     textAlign: "center",
-                    padding: "70px 40px",
+                    padding: "clamp(30px, 6vw, 70px) clamp(20px, 5vw, 40px)",
                     background: "var(--background-alt)",
                     borderRadius: "24px",
                     border: "1px solid rgba(197, 160, 89, 0.3)",
@@ -109,7 +109,7 @@ function ApplyFormContent() {
                 >
                     ✓
                 </motion.div>
-                <h2 style={{ fontSize: "2.3rem", marginBottom: "14px", fontWeight: 700, color: "var(--foreground)" }}>
+                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.3rem)", marginBottom: "14px", fontWeight: 700, color: "var(--foreground)" }}>
                     Application Received!
                 </h2>
                 <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "480px", margin: "0 auto 24px" }}>
@@ -130,27 +130,31 @@ function ApplyFormContent() {
     }
 
     return (
-        <div style={{ background: "var(--background-alt)", padding: "50px", borderRadius: "24px", border: "1px solid rgba(0,0,0,0.05)", boxShadow: "0 20px 50px rgba(0,0,0,0.05)" }}>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+        <div style={{ background: "var(--background-alt)", padding: "clamp(24px, 5vw, 50px)", borderRadius: "24px", border: "1px solid rgba(0,0,0,0.05)", boxShadow: "0 20px 50px rgba(0,0,0,0.05)" }}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                <div className="form-row-2">
                     <div>
                         <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "10px", fontWeight: 600 }}>First Name</label>
                         <input
                             type="text"
+                            placeholder="Jane"
                             value={form.first_name}
                             onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                             required
-                            style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                            disabled={isSubmitting}
+                            style={{ width: "100%", padding: "16px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white", fontSize: "1rem", outline: "none" }}
                         />
                     </div>
                     <div>
                         <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "10px", fontWeight: 600 }}>Last Name</label>
                         <input
                             type="text"
+                            placeholder="Doe"
                             value={form.last_name}
                             onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                             required
-                            style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                            disabled={isSubmitting}
+                            style={{ width: "100%", padding: "16px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white", fontSize: "1rem", outline: "none" }}
                         />
                     </div>
                 </div>
@@ -159,14 +163,16 @@ function ApplyFormContent() {
                     <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "10px", fontWeight: 600 }}>Email Address</label>
                     <input
                         type="email"
+                        placeholder="jane@example.com"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         required
-                        style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                        disabled={isSubmitting}
+                        style={{ width: "100%", padding: "16px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white", fontSize: "1rem", outline: "none" }}
                     />
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "20px" }}>
+                <div className="form-row-phone">
                     <CustomDropdown
                         label="Country"
                         value={form.country_code}
@@ -182,7 +188,7 @@ function ApplyFormContent() {
                             value={form.phone_number}
                             onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
                             disabled={isSubmitting}
-                            style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                            style={{ width: "100%", padding: "16px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white", fontSize: "1rem", outline: "none" }}
                         />
                     </div>
                 </div>
@@ -237,7 +243,7 @@ function ApplyFormContent() {
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         placeholder="Tell us a bit more about your requirements..."
-                        style={{ width: "100%", padding: "15px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white" }}
+                        style={{ width: "100%", padding: "16px 20px", borderRadius: "10px", border: "1px solid rgba(0,0,0,0.1)", background: "white", fontSize: "1rem", outline: "none", resize: "vertical" }}
                     ></textarea>
                 </div>
 
@@ -247,9 +253,9 @@ function ApplyFormContent() {
                     type="submit"
                     disabled={isSubmitting}
                     className="btn-primary"
-                    style={{ padding: "18px", borderRadius: "100px", marginTop: "10px", opacity: isSubmitting ? 0.7 : 1 }}
+                    style={{ padding: "18px", borderRadius: "100px", marginTop: "10px", opacity: isSubmitting ? 0.7 : 1, width: "100%", fontSize: "0.9rem" }}
                 >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    {isSubmitting ? "Submitting..." : "Submit Application →"}
                 </button>
             </form>
         </div>
@@ -260,33 +266,33 @@ export default function ApplyPage() {
     return (
         <>
             <Header />
-            <main style={{ minHeight: "100vh", paddingTop: "150px", paddingBottom: "100px", background: "var(--background)" }}>
+            <main style={{ minHeight: "100vh", paddingTop: "clamp(110px, 14vh, 150px)", paddingBottom: "clamp(60px, 8vh, 100px)", background: "var(--background)" }}>
                 <div className="container" style={{ maxWidth: "1000px" }}>
-                    <Link href="/services" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--primary)", marginBottom: "40px", fontSize: "0.9rem", textDecoration: "none" }}>
+                    <Link href="/services" style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--primary)", marginBottom: "30px", fontSize: "0.9rem", textDecoration: "none" }}>
                         <ChevronLeft size={16} /> Back to Services
                     </Link>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.25fr", gap: "60px", alignItems: "start" }}>
+                    <div className="contact-grid-wrapper" style={{ alignItems: "start" }}>
                         <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
                             <p style={{ textTransform: "uppercase", letterSpacing: "4px", fontSize: "0.75rem", color: "var(--gold)", marginBottom: "15px" }}>Collaboration</p>
-                            <h1 style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "30px" }}>
+                            <h1 style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "25px" }}>
                                 Let's Start a <br /><span style={{ fontStyle: "italic", color: "var(--gold)" }}>Partnership.</span>
                             </h1>
-                            <p style={{ fontSize: "1.1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "40px" }}>
+                            <p style={{ fontSize: "1.05rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "30px" }}>
                                 Fill out the application form and we will review your request. Our goal is to create authentic, high-impact content and experiences.
                             </p>
 
-                            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                            <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
                                 <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-                                    <CheckCircle2 size={20} color="var(--gold)" />
+                                    <CheckCircle2 size={20} color="var(--gold)" style={{ flexShrink: 0 }} />
                                     <span style={{ fontSize: "0.95rem" }}>Direct contact within 24 hours</span>
                                 </div>
                                 <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-                                    <CheckCircle2 size={20} color="var(--gold)" />
+                                    <CheckCircle2 size={20} color="var(--gold)" style={{ flexShrink: 0 }} />
                                     <span style={{ fontSize: "0.95rem" }}>Tailored strategy for your brand</span>
                                 </div>
                                 <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-                                    <CheckCircle2 size={20} color="var(--gold)" />
+                                    <CheckCircle2 size={20} color="var(--gold)" style={{ flexShrink: 0 }} />
                                     <span style={{ fontSize: "0.95rem" }}>Professional hospitality execution</span>
                                 </div>
                             </div>
